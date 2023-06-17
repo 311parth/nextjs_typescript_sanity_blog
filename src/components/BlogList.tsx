@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { urlForImage } from "../../sanity/lib/image";
+import ClientSideRoute from "./ClientSideRoute";
 type Props = {
   posts: Post[];
 };
@@ -15,8 +16,10 @@ function BlogList({ posts }: Props) {
       <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center px-2 md:px-4">
         
       {posts.map((post) => {
-
         return(
+        <ClientSideRoute  key={post._id} route={`/post/${post.slug.current}`}>
+
+
         <div key={post._id} className="bg-green-200  mx-5 mb-7 md:mx-5  border-2 border-[#F7AB0A] " >
           <div className="relative w-full h-80">
               <Image
@@ -46,7 +49,9 @@ function BlogList({ posts }: Props) {
                  })}
               </div>
             </div>
-        </div>);
+        </div>
+        </ClientSideRoute>
+        );
       })}
       </div>
 
